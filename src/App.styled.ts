@@ -10,9 +10,4 @@ export const Content = styled.main`
   > section:first-child {
     max-width: 38.9rem;
   }
-
-  > section:last-child {
-    width: 46.8rem;
-    background: white;
-  }
 `

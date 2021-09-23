@@ -35,6 +35,7 @@ export const TimerArea = styled.div`
     justify-content: center;
     border-radius: 0.5rem;
     background: ${theme.colors.white};
+    box-shadow: 0px 0px 60px rgba(0, 0, 0, 0.05);
     position: relative;
     padding: 1.8rem 0;
     flex: 1;
