@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GlobalStyle, Header, User } from 'ui'
+import { Countdown, GlobalStyle, Header, User } from 'ui'
 
 import * as S from './App.styled'
 
@@ -12,7 +12,13 @@ export function App() {
       <Header />
 
       <S.Content>
-        <User />
+        <section>
+          <User />
+          <Countdown />
+        </section>
+        <section>
+          <h1>Box</h1>
+        </section>
       </S.Content>
     </>
   )

@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    overflow-y: hidden;
     background: ${theme.colors.neutral[100]};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.paragraph};
