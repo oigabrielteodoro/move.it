@@ -1,5 +1,11 @@
 import React from 'react'
+import { GlobalStyle } from 'ui'
 
 export function App() {
-  return <h1>Move.it</h1>
+  return (
+    <>
+      <GlobalStyle />
+      <h1>Move.it</h1>
+    </>
+  )
 }
