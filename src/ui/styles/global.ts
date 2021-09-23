@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background: ${theme.colors.white};
+    background: ${theme.colors.neutral[100]};
     font-family: ${theme.font.family};
     font-size: ${theme.font.sizes.paragraph};
   }

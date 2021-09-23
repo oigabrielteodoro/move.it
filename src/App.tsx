@@ -1,11 +1,19 @@
 import React from 'react'
-import { GlobalStyle } from 'ui'
+
+import { GlobalStyle, Header } from 'ui'
+
+import * as S from './App.styled'
 
 export function App() {
   return (
     <>
       <GlobalStyle />
-      <h1>Move.it</h1>
+
+      <Header />
+
+      <S.Content>
+        <h1>Move.it</h1>
+      </S.Content>
     </>
   )
 }

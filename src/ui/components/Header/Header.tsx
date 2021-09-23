@@ -6,6 +6,7 @@ export function Header() {
   return (
     <S.Container>
       <span>0 xp</span>
+      <S.Progress progress={30} />
       <span>600 xp</span>
     </S.Container>
   )
