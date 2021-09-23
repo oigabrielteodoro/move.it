@@ -22,14 +22,22 @@ export const theme = {
     },
   },
   colors: {
-    white: '#fafafa',
+    white: '#ffffff',
     blue: {
-      400: '#2dd4bf',
-      500: '#1fc8e1',
+      500: '#5965e0',
+      600: '#4953b8',
+    },
+    red: {
+      500: '#e83f5b',
+    },
+    green: {
+      500: '#4cd62b',
     },
     neutral: {
-      800: '#293445',
-      900: '#1e293b',
+      100: '#f2f3f5',
+      200: '#dcdde0',
+      500: '#666666',
+      900: '#2e384d',
     },
   },
   shadows: {
