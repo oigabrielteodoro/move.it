@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from 'ui/styles'
+import { theme } from 'ui'
 
 export const Container = styled.div`
   margin-top: 6rem;

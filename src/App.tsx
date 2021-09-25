@@ -1,7 +1,7 @@
 import { TimerProvider } from 'context'
 import React from 'react'
 
-import { Challenge, Countdown, GlobalStyle, Header, User } from 'ui'
+import { Challenge, Timer, GlobalStyle, Header, User } from 'ui'
 
 import * as S from './App.styled'
 
@@ -15,7 +15,7 @@ export function App() {
       <S.Content>
         <section>
           <User />
-          <Countdown />
+          <Timer />
         </section>
         <Challenge />
       </S.Content>

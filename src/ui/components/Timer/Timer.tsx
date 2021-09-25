@@ -2,13 +2,13 @@ import { useTimer } from 'context'
 import React from 'react'
 import { Button } from '../Button'
 
-import * as S from './Countdown.styled'
+import * as S from './Timer.styled'
 
 function getFormattedTimer(value: number) {
   return String(value).padStart(2, '0').split('')
 }
 
-export function Countdown() {
+export function Timer() {
   const {
     timer: [minutes, seconds],
     startTimer,
