@@ -21,9 +21,10 @@ type TimerContextData = {
 const TimerContext = createContext({} as TimerContextData)
 
 let timerId: ReturnType<typeof setTimeout>
+const timerInitialValue = 1 * 60 * 5 // 5 Minutes
 
 export function TimerProvider({ children }: TimerProviderProps) {
-  const [timer, setTimer] = useState(0.1 * 60)
+  const [timer, setTimer] = useState(timerInitialValue)
   const [isActive, setIsActive] = useState(false)
   const [hasFinished, setHasFinished] = useState(false)
 
@@ -47,7 +48,7 @@ export function TimerProvider({ children }: TimerProviderProps) {
   const clearTimer = () => {
     setIsActive(false)
     setHasFinished(false)
-    setTimer(0.1 * 60)
+    setTimer(timerInitialValue)
     timerId && clearTimeout(timerId)
   }
 

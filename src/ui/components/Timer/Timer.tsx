@@ -55,11 +55,16 @@ export function Timer() {
           variant={isActive ? 'cancel' : 'default'}
           onClick={isActive ? clearTimer : startTimer}
         >
-          {isActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
           {isActive ? (
-            <AiOutlineClose size={16} />
+            <>
+              Abandonar ciclo
+              <AiOutlineClose size={16} />
+            </>
           ) : (
-            <AiOutlineCaretRight size={16} />
+            <>
+              Iniciar um ciclo
+              <AiOutlineCaretRight size={16} />
+            </>
           )}
         </Button>
       )}
