@@ -58,10 +58,12 @@ export const TimerArea = styled.div`
     line-height: 10rem;
     font-family: 'Rajdhani';
     margin: 0 auto;
+    width: 5.2rem;
   }
 
   > h1 {
     padding: 0;
     margin: 0 0.8rem;
+    width: inherit;
   }
 `

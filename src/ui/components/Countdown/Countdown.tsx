@@ -1,9 +1,22 @@
+import { useTimer } from 'context'
 import React from 'react'
 import { Button } from '../Button'
 
 import * as S from './Countdown.styled'
 
+function getFormattedTimer(value: number) {
+  return String(value).padStart(2, '0').split('')
+}
+
 export function Countdown() {
+  const {
+    timer: [minutes, seconds],
+    startTimer,
+  } = useTimer()
+
+  const [minuteLeft, minuteRight] = getFormattedTimer(minutes)
+  const [secondLeft, secondRight] = getFormattedTimer(seconds)
+
   return (
     <S.Container>
       <section>
@@ -14,17 +27,17 @@ export function Countdown() {
 
       <S.TimerArea>
         <div>
-          <h1>2</h1>
-          <h1>5</h1>
+          <h1>{minuteLeft}</h1>
+          <h1>{minuteRight}</h1>
         </div>
         <h1>:</h1>
         <div>
-          <h1>0</h1>
-          <h1>0</h1>
+          <h1>{secondLeft}</h1>
+          <h1>{secondRight}</h1>
         </div>
       </S.TimerArea>
 
-      <Button>Iniciar um ciclo</Button>
+      <Button onClick={startTimer}>Iniciar um ciclo</Button>
     </S.Container>
   )
 }
