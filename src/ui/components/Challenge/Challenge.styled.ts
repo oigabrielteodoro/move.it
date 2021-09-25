@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from 'ui'
+import { theme } from 'ui/styles'
 
 export const Container = styled.section`
   width: 46.8rem;

@@ -11,6 +11,7 @@ type TimerProviderProps = {
 }
 
 type TimerContextData = {
+  isActive: boolean
   hasFinished: boolean
   timer: [number, number]
   startTimer: () => void
@@ -33,6 +34,7 @@ export function TimerProvider({ children }: TimerProviderProps) {
       }, 1000)
     } else if (isActive && timer === 0) {
       window.console.log('start new challenge')
+      clearTimeout(timerId)
       setHasFinished(true)
       setIsActive(false)
     }
@@ -44,6 +46,8 @@ export function TimerProvider({ children }: TimerProviderProps) {
 
   const clearTimer = () => {
     setIsActive(false)
+    setHasFinished(false)
+    setTimer(0.1 * 60)
     timerId && clearTimeout(timerId)
   }
 
@@ -52,7 +56,13 @@ export function TimerProvider({ children }: TimerProviderProps) {
 
   return (
     <TimerContext.Provider
-      value={{ hasFinished, timer: [minutes, seconds], startTimer, clearTimer }}
+      value={{
+        hasFinished,
+        timer: [minutes, seconds],
+        isActive,
+        startTimer,
+        clearTimer,
+      }}
     >
       {children}
     </TimerContext.Provider>

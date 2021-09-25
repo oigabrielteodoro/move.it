@@ -1,5 +1,10 @@
-import { useTimer } from 'context'
 import React from 'react'
+import { AiOutlineCaretRight, AiOutlineClose } from 'react-icons/ai'
+import { FaCheckCircle } from 'react-icons/fa'
+
+import { useTimer } from 'context'
+
+import { theme } from 'ui/styles'
 import { Button } from '../Button'
 
 import * as S from './Timer.styled'
@@ -10,8 +15,11 @@ function getFormattedTimer(value: number) {
 
 export function Timer() {
   const {
+    isActive,
+    hasFinished,
     timer: [minutes, seconds],
     startTimer,
+    clearTimer,
   } = useTimer()
 
   const [minuteLeft, minuteRight] = getFormattedTimer(minutes)
@@ -37,7 +45,24 @@ export function Timer() {
         </div>
       </S.TimerArea>
 
-      <Button onClick={startTimer}>Iniciar um ciclo</Button>
+      {hasFinished ? (
+        <Button variant='finished' onClick={clearTimer}>
+          Ciclo completo{' '}
+          <FaCheckCircle size={14} color={theme.colors.green[500]} />
+        </Button>
+      ) : (
+        <Button
+          variant={isActive ? 'cancel' : 'default'}
+          onClick={isActive ? clearTimer : startTimer}
+        >
+          {isActive ? 'Abandonar ciclo' : 'Iniciar um ciclo'}
+          {isActive ? (
+            <AiOutlineClose size={16} />
+          ) : (
+            <AiOutlineCaretRight size={16} />
+          )}
+        </Button>
+      )}
     </S.Container>
   )
 }
