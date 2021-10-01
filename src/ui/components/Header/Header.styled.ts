@@ -27,6 +27,22 @@ export const Progress = styled.div<ProgressProps>`
   height: 0.4rem;
   width: 100%;
 
+  span {
+    position: absolute;
+    transition: width 0.5s ease-out;
+    transform: translateX(-2rem);
+    top: 1rem;
+
+    ${({ progress = 0 }) =>
+      progress <= 0
+        ? css`
+            opacity: 0;
+          `
+        : css`
+            left: ${`${progress}%`};
+          `}
+  }
+
   ${({ progress }) =>
     css`
       &::before {
