@@ -2,12 +2,13 @@ import React, {
   createContext,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react'
 
-import { CHALLENGES } from 'assets'
+import { CHALLENGES, NOTIFICATION } from 'assets'
 
 type Challenge = {
   type: 'body' | 'eye'
@@ -33,10 +34,24 @@ type ChallengeContextData = {
 
 const ChallengeContext = createContext({} as ChallengeContextData)
 
+function getStoragedValue(key: string) {
+  const storagedValue = localStorage.getItem(`@move-it:${key}`)
+
+  if (storagedValue) {
+    return Number(storagedValue)
+  }
+
+  return undefined
+}
+
 export function ChallengeProvider({ children }: ChallengeProviderProps) {
-  const [level, setLevel] = useState(1)
-  const [completedCount, setCompletedCount] = useState(0)
-  const [experienceCount, setExperienceCount] = useState(0)
+  const [level, setLevel] = useState(getStoragedValue('level') || 1)
+  const [completedCount, setCompletedCount] = useState(
+    getStoragedValue('completedCount') || 0,
+  )
+  const [experienceCount, setExperienceCount] = useState(
+    getStoragedValue('experienceCount') || 0,
+  )
 
   const [activeChallenge, setActiveChallenge] = useState<Challenge>()
   const [leveledUp, setLeveledUp] = useState(false)
@@ -50,15 +65,21 @@ export function ChallengeProvider({ children }: ChallengeProviderProps) {
     Notification.requestPermission()
   }, [])
 
+  useEffect(() => {
+    localStorage.setItem('@move-it:level', String(level))
+    localStorage.setItem('@move-it:experienceCount', String(experienceCount))
+    localStorage.setItem('@move-it:completedCount', String(completedCount))
+  }, [level, experienceCount, completedCount])
+
   const startNewChallenge = useCallback(() => {
-    const randomChallengeIndex = Math.floor(Math.random() + CHALLENGES.length)
+    const randomChallengeIndex = Math.floor(Math.random() * CHALLENGES.length)
     const challenge = CHALLENGES[randomChallengeIndex]
 
     if (!challenge) return
 
     setActiveChallenge(challenge as Challenge)
 
-    new Audio('/notification.mp3').play()
+    new Audio(NOTIFICATION).play()
 
     if (Notification.permission === 'granted') {
       new Notification('Novo desafio 🎉', {
@@ -108,4 +129,14 @@ export function ChallengeProvider({ children }: ChallengeProviderProps) {
       {children}
     </ChallengeContext.Provider>
   )
+}
+
+export const useChallenge = () => {
+  const context = useContext(ChallengeContext)
+
+  if (!context) {
+    throw new Error('useChallenge has ChallengeProvider')
+  }
+
+  return context
 }

@@ -2,14 +2,14 @@ import React from 'react'
 import { AiOutlineCaretRight, AiOutlineClose } from 'react-icons/ai'
 import { FaCheckCircle } from 'react-icons/fa'
 
-import { useTimer } from 'context'
+import { useChallenge, useTimer } from 'context'
 
 import { theme } from 'ui/styles'
 import { Button } from '../Button'
 
 import * as S from './Timer.styled'
 
-function getFormattedTimer(value: number) {
+function formatValue(value: number) {
   return String(value).padStart(2, '0').split('')
 }
 
@@ -22,14 +22,18 @@ export function Timer() {
     clearTimer,
   } = useTimer()
 
-  const [minuteLeft, minuteRight] = getFormattedTimer(minutes)
-  const [secondLeft, secondRight] = getFormattedTimer(seconds)
+  const { completedCount } = useChallenge()
+
+  const [minuteLeft, minuteRight] = formatValue(minutes)
+  const [secondLeft, secondRight] = formatValue(seconds)
+
+  const completedCountFormatted = formatValue(completedCount)
 
   return (
     <S.Container>
       <section>
         <span>Desafios completos</span>
-        <span>00</span>
+        <span>{completedCountFormatted}</span>
       </section>
       <hr />
 
@@ -47,7 +51,7 @@ export function Timer() {
 
       {hasFinished ? (
         <Button variant='finished' onClick={clearTimer}>
-          Ciclo completo{' '}
+          Ciclo completo
           <FaCheckCircle size={14} color={theme.colors.green[500]} />
         </Button>
       ) : (

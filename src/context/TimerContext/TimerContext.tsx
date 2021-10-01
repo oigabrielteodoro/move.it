@@ -1,3 +1,4 @@
+import { useChallenge } from 'context/ChallengeContext'
 import React, {
   createContext,
   ReactNode,
@@ -21,12 +22,14 @@ type TimerContextData = {
 const TimerContext = createContext({} as TimerContextData)
 
 let timerId: ReturnType<typeof setTimeout>
-const timerInitialValue = 1 * 60 * 5 // 5 Minutes
+const timerInitialValue = 0.1 * 60 // 5 Minutes
 
 export function TimerProvider({ children }: TimerProviderProps) {
   const [timer, setTimer] = useState(timerInitialValue)
   const [isActive, setIsActive] = useState(false)
   const [hasFinished, setHasFinished] = useState(false)
+
+  const { startNewChallenge } = useChallenge()
 
   useEffect(() => {
     if (isActive && timer > 0) {
@@ -34,12 +37,12 @@ export function TimerProvider({ children }: TimerProviderProps) {
         setTimer((prevState) => prevState - 1)
       }, 1000)
     } else if (isActive && timer === 0) {
-      window.console.log('start new challenge')
+      startNewChallenge()
       clearTimeout(timerId)
       setHasFinished(true)
       setIsActive(false)
     }
-  }, [isActive, timer])
+  }, [isActive, timer, startNewChallenge])
 
   const startTimer = () => {
     setIsActive(true)
