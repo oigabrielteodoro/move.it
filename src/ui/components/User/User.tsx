@@ -1,10 +1,14 @@
 import React from 'react'
 import { GoArrowUp } from 'react-icons/go'
-import { theme } from 'ui/styles'
+
+import { theme } from 'ui'
+import { useChallenge } from 'context'
 
 import * as S from './User.styled'
 
 export function User() {
+  const { level } = useChallenge()
+
   return (
     <S.Container>
       <img
@@ -16,7 +20,7 @@ export function User() {
         <h2>Gabriel Teodoro</h2>
         <span>
           <GoArrowUp color={theme.colors.green[500]} size={24} />
-          Level 1
+          Level {level}
         </span>
       </S.Data>
     </S.Container>

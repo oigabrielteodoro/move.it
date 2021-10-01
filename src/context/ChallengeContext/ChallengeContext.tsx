@@ -8,6 +8,8 @@ import React, {
   useState,
 } from 'react'
 
+import { Modal } from 'ui'
+
 import { CHALLENGES, NOTIFICATION } from 'assets'
 
 type Challenge = {
@@ -30,6 +32,7 @@ type ChallengeContextData = {
   completeChallenge: () => void
   startNewChallenge: () => void
   resetChallenge: () => void
+  closeModal: () => void
 }
 
 const ChallengeContext = createContext({} as ChallengeContextData)
@@ -112,6 +115,8 @@ export function ChallengeProvider({ children }: ChallengeProviderProps) {
     setActiveChallenge(undefined)
   }, [])
 
+  const closeModal = () => setLeveledUp(false)
+
   return (
     <ChallengeContext.Provider
       value={{
@@ -124,9 +129,12 @@ export function ChallengeProvider({ children }: ChallengeProviderProps) {
         completeChallenge,
         startNewChallenge,
         resetChallenge,
+        closeModal,
       }}
     >
       {children}
+
+      {leveledUp && <Modal />}
     </ChallengeContext.Provider>
   )
 }
