@@ -29,7 +29,7 @@ export function TimerProvider({ children }: TimerProviderProps) {
   const [isActive, setIsActive] = useState(false)
   const [hasFinished, setHasFinished] = useState(false)
 
-  const { startNewChallenge } = useChallenge()
+  const { startNewChallenge, resetChallenge } = useChallenge()
 
   useEffect(() => {
     if (isActive && timer > 0) {
@@ -49,6 +49,7 @@ export function TimerProvider({ children }: TimerProviderProps) {
   }
 
   const clearTimer = () => {
+    resetChallenge()
     setIsActive(false)
     setHasFinished(false)
     setTimer(timerInitialValue)
