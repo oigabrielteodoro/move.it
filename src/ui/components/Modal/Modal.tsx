@@ -19,7 +19,11 @@ export function Modal() {
         <main>
           <S.NewLevel>
             <strong>{level}</strong>
-            <img src={WIN} alt='Nível avançado!' />
+            <img
+              src={WIN}
+              alt='Nível avançado!'
+              width={level > 10 ? 200 : 150}
+            />
           </S.NewLevel>
           <h1>Parabéns</h1>
           <h3>Você alcançou um novo level.</h3>
